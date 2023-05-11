@@ -62,3 +62,8 @@ body {
 .withdraw-success {
   color: green;
 }
+.hero {
+  display: flex;
+  text-align: center;
+  align-items: center;
+}

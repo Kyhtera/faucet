@@ -68,7 +68,7 @@ function App() {
       <nav className="navbar">
         <div className="container">
           <div className="navbar-brand">
-            <h1 className="navbar-item is-size-4">MyToken (MTK) Faucet</h1>
+            <h1 className="navbar-item is-size-4">KyThR Token</h1>
           </div>
           <div id="navbar-menu" className="navbar-menu">
             <div className="navbar-end">
