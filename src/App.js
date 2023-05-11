@@ -5,8 +5,8 @@ import { useState, useEffect } from "react";
 import FaucetAbi from "./abis/faucet.json";
 import Swal from 'sweetalert2';
 
+const faucetContractAddress = "0xEeC9a73B954108Bff4a2bB35A8e9aD1Ff446b323"; // kendi faucet kontrat adresinizle degistirin.
 
-const faucetContractAddress = "0xcF58258A2a47a5B4Fd8EAAABC44833FA35E25477"
 function App() {
 
   const [walletAddress, setWalletAddress] = useState("");
@@ -33,37 +33,35 @@ function App() {
   }
 
   const getTokens = async () => {
+
     try {
-      const contract = new ethers.Contract(faucetContractAddress, FaucetAbi, provider.getSigner());//kendi faucet adresimiz ile değiştireceğiz. 1. contrat adres 2.abi 3-Provider 
+      const contract = new ethers.Contract(faucetContractAddress, FaucetAbi, provider.getSigner()); // 1.contract address, 2.abi,  3.provider
+
       const transaction = await contract.requestToken();
+      console.log("transaction", transaction);
 
       if (transaction.hash) {
         Swal.fire({
-          title: 'Succes!',
+          title: 'Success!',
           html:
-            `Check transfer hash,
-            < a href = "https://sepolia.etherscan.io/tx/ ${transaction.hash}" target = "_blank">Etherscan TX Hash`,
+            `Check transaction hash,
+            <a href="https://sepolia.etherscan.io/tx/${transaction.hash}" target="_blank">Etherscan TX Hash</a>
+          at etherscan`,
           icon: 'success',
           confirmButtonText: 'Ok'
         })
       }
-
     } catch (err) {
-      console.log("error", err);
+      console.log(err);
+
       Swal.fire({
         title: 'Error!',
-        text: "Are You Sure?",
+        text: err.message,
         icon: 'error',
         confirmButtonText: 'Ok'
       })
     }
   }
-
-
-
-
-
-
 
   return (
     <>
